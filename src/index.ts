@@ -82,7 +82,7 @@ async function testFila() {
   await zerarAquivo();
   const mensagens = [
     'Lorem ipsum dolor sit amet',
-    'consectetur adipiscing elit',
+    'consetetur adipiscing elit',
     'Quisque scelerisque pulvinar lacus',
     'ut elementum justo commodo',
     'Nulla ac ullamcorper sapien,',
@@ -90,14 +90,14 @@ async function testFila() {
     'eget commodo ex sodales ut',
     'Suspendisse porttitor sed felis sit amet molestie',
     'In sit amet gravida quam',
-    'Nulla vitae nisl a nibh luctus tincidunt',
+    'Nulla vitae nisl a nibh luctus tincidunt'
   ];
 
   for (const mensagem of mensagens) {
     await escreveNaFila(mensagem);
   }
 
-  const mensagensEscritas = await leArquivo(() => {});
+  const mensagensEscritas = await leArquivo();
   const todasMensagensEscritas = mensagensEscritas
     .split('\n')
     .every((mensagem, index) => mensagem === mensagens[index]);
@@ -106,12 +106,14 @@ async function testFila() {
   for (const menssagem of mensagens) {
     const encontrada = await consumirDaFila();
     console.log(encontrada);
+    console.assert(encontrada === menssagem, 'encontrada = ' + encontrada);
+    console.assert(encontrada === menssagem, 'mensagem = ' + menssagem);
     console.assert(encontrada === menssagem, 'mensagem esperada não encontrada');
   }
 }
 
-testChunk();
+/*testChunk();
 testCompact();
 testFromPairs();
-testUniq();
+testUniq();*/
 testFila();
