@@ -8,6 +8,7 @@
  * 
  * @returns somente os itens definidos.
  */
- export const compact = (items: unknown[]): unknown[] => {
-  return null;
-};
+//Para remover os itens falsy de uma array, uso o método .filter(). O método não altera a array original.
+export const compact = (items: unknown[]): unknown[] => {
+  return items.filter(valorF => valorF !== 0 && valorF !== false && valorF !== '' && valorF !== null && valorF !== undefined)
+ };
